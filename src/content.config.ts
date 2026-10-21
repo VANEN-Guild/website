@@ -69,18 +69,44 @@ const members = defineCollection({
     .object({
       roles: z.array(z.string()).min(1),
       members: z.array(member).default([]),
+      // Zuordnung für Mitglieder aus dem Discord-Sync
+      discord: z
+        .object({
+          defaultRole: z.string(),
+          roles: z.record(z.string(), z.array(z.string())).default({}),
+        })
+        .optional(),
     })
-    .superRefine(({ roles, members }, ctx) => {
-      members.forEach((m, i) => {
-        if (!roles.includes(m.role)) {
-          ctx.addIssue({
-            code: 'custom',
-            path: ['members', i, 'role'],
-            message: `Unbekannte Rolle „${m.role}“ bei ${m.name}. Erlaubt: ${roles.join(', ')}`,
-          });
+    .superRefine(({ roles, members, discord }, ctx) => {
+      const check = (role: string, path: (string | number)[], context: string) => {
+        if (!roles.includes(role)) {
+          ctx.addIssue({ code: 'custom', path, message: `Unbekannte Rolle „${role}“ ${context}. Erlaubt: ${roles.join(', ')}` });
         }
-      });
+      };
+      members.forEach((m, i) => check(m.role, ['members', i, 'role'], `bei ${m.name}`));
+      if (discord) {
+        check(discord.defaultRole, ['discord', 'defaultRole'], 'in discord.defaultRole');
+        Object.keys(discord.roles).forEach((role) => check(role, ['discord', 'roles', role], 'in discord.roles'));
+      }
     }),
 });
 
-export const collections = { pages, news, history, site, members };
+// Wird von scripts/sync-discord.mjs erzeugt; fehlt die Datei, gibt es nur die manuellen Einträge.
+const discordMembers = defineCollection({
+  loader: glob({ pattern: 'discord-members.json', base: './src/data' }),
+  schema: z.object({
+    syncedAt: z.string(),
+    members: z.array(
+      z.object({
+        id: z.string(),
+        username: z.string(),
+        displayName: z.string(),
+        roles: z.array(z.string()),
+        joinedAt: z.string(),
+        avatar: z.boolean(),
+      }),
+    ),
+  }),
+});
+
+export const collections = { pages, news, history, site, members, discordMembers };

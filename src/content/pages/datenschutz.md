@@ -71,12 +71,18 @@ Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitu
 
 ## Mitgliederliste
 
-Auf der Seite „Mitglieder“ veröffentlichen wir Angaben zu Mitgliedern unserer Spielergemeinschaft (Anzeigename, Rolle, ggf. Discord-Benutzername und -Profil-Link, Jahr des Beitritts, gespielte Spiele und eine selbst verfasste Kurzbeschreibung). Die Veröffentlichung erfolgt nur mit Einwilligung der jeweiligen Person. Die Einwilligung kann jederzeit per Discord oder E-Mail widerrufen werden; der Eintrag wird dann entfernt.
+Auf der Seite „Mitglieder“ veröffentlichen wir Angaben zu Mitgliedern unserer Spielergemeinschaft. Die Veröffentlichung erfolgt nur mit Einwilligung der jeweiligen Person:
 
-- **Verarbeitete Datenarten:** Bestandsdaten (z. B. Namen), Inhaltsdaten (z. B. Kurzbeschreibung).
+- **Manuelle Einträge:** Anzeigename, Rolle und – soweit angegeben – Discord-Benutzername und Profil-Link, Jahr des Beitritts, gespielte Spiele und eine selbst verfasste Kurzbeschreibung.
+- **Einträge aus unserem Discord-Server:** Mitglieder, die sich auf unserem Discord-Server selbst die Rolle „Website“ geben, werden automatisch übernommen. Dabei werden Anzeigename, Discord-Benutzername und Profil-Link, das Beitrittsjahr zum Server, die Serverrollen (zur Gruppierung) und das Profilbild bei der Erstellung der Website bzw. täglich über die Schnittstelle von Discord abgerufen. Das Profilbild wird von uns gespeichert und von unserem Webhoster ausgeliefert; beim Aufruf der Seite werden keine Daten an Discord übertragen.
+
+Die Einwilligung kann jederzeit widerrufen werden – durch Entfernen der Rolle „Website“ auf dem Discord-Server oder per Discord bzw. E-Mail an uns. Der Eintrag wird dann bei der nächsten Aktualisierung (spätestens nach einem Tag) entfernt.
+
+- **Verarbeitete Datenarten:** Bestandsdaten (z. B. Namen), Inhaltsdaten (z. B. Kurzbeschreibung, Profilbild).
 - **Betroffene Personen:** Mitglieder.
 - **Zwecke der Verarbeitung:** Vorstellung der Spielergemeinschaft.
 - **Rechtsgrundlagen:** Einwilligung (Art. 6 Abs. 1 S. 1 lit. a. DSGVO).
+- **Datenquelle für automatisch übernommene Einträge:** Discord Inc., 444 De Haro Street #200, San Francisco, CA 94107, USA; Datenschutzerklärung: [discord.com/privacy](https://discord.com/privacy).
 
 ## Links zu externen Diensten
 

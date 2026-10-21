@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # täglich neu bauen, damit die Mitgliederliste mit Discord synchron bleibt
+  schedule:
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 permissions:
@@ -25,6 +28,13 @@ jobs:
       BASE_PATH: ${{ vars.BASE_PATH || format('/{0}', github.event.repository.name) }}
     steps:
       - uses: actions/checkout@v7
+      # Ohne DISCORD_BOT_TOKEN wird der Schritt übersprungen (nur manuelle Mitglieder)
+      - name: Discord-Mitglieder synchronisieren
+        run: node scripts/sync-discord.mjs
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
+          DISCORD_OPTIN_ROLE: ${{ vars.DISCORD_OPTIN_ROLE }}
       - uses: withastro/action@v6
         with:
           node-version: 24

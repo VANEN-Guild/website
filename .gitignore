@@ -4,3 +4,8 @@ dist/
 .DS_Store
 *.log
 .idea
+
+# Discord-Sync (wird beim Build erzeugt)
+.env
+src/data/discord-members.json
+src/assets/img/discord/

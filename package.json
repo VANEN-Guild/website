@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "sync:discord": "node --env-file-if-exists=.env scripts/sync-discord.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

@@ -10,3 +10,8 @@ export function img(path: string): ImageMetadata {
   if (!mod) throw new Error(`Bild nicht gefunden: src/assets/img/${path}`);
   return mod.default;
 }
+
+/** Wie img(), gibt aber undefined zurück, wenn das Bild fehlt. */
+export function findImg(path: string): ImageMetadata | undefined {
+  return images[`/src/assets/img/${path}`]?.default;
+}

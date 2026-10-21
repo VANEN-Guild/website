@@ -7,6 +7,16 @@ roles:
   - Offiziere
   - Mitglieder
 
+# Discord-Sync: Mitglieder mit der Opt-in-Rolle (z. B. „Website“) werden automatisch ergänzt.
+# Wer unten manuell eingetragen ist (gleiche discordId oder gleicher discord-Name), wird vom Sync ignoriert.
+discord:
+  # Gruppe für alle, die keine der folgenden Discord-Rollen haben
+  defaultRole: Mitglieder
+  # Gruppe auf der Seite → Discord-Rollennamen (die erste passende Gruppe gewinnt)
+  roles:
+    Leitung: [Leitung]
+    Offiziere: [Offizier, Offiziere]
+
 members:
   # name:      Anzeigename (Pflicht)
   # role:      eine der Gruppen oben (Pflicht)

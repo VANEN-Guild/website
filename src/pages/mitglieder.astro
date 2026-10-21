@@ -3,16 +3,10 @@ import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 import MemberCard from '../components/MemberCard.astro';
 import Icon from '../components/Icon.astro';
+import { getMemberGroups } from '../lib/members';
 
 const site = (await getEntry('site', 'site'))!.data;
-const { roles, members } = (await getEntry('members', 'members'))!.data;
-
-const groups = roles
-  .map((role) => ({
-    role,
-    members: members.filter((m) => m.role === role).sort((a, b) => a.name.localeCompare(b.name, 'de')),
-  }))
-  .filter((group) => group.members.length > 0);
+const groups = await getMemberGroups();
 ---
 
 <PageLayout page="mitglieder">

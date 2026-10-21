@@ -1,8 +1,7 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
-
-type Member = CollectionEntry<'members'>['data']['members'][number];
+import type { Member } from '../lib/members';
 
 interface Props {
   member: Member;
@@ -14,7 +13,15 @@ const profile = member.discordId ? `https://discord.com/users/${member.discordId
 
 <article class="member panel">
   <header>
-    <span class="initial" aria-hidden="true">{member.name.charAt(0).toUpperCase()}</span>
+    {
+      member.avatar ? (
+        <Image class="avatar" src={member.avatar} alt="" width={88} height={88} format="webp" loading="lazy" />
+      ) : (
+        <span class="avatar initial" aria-hidden="true">
+          {member.name.charAt(0).toUpperCase()}
+        </span>
+      )
+    }
     <div>
       <h3>{member.name}</h3>
       {
@@ -60,20 +67,24 @@ const profile = member.discordId ? `https://discord.com/users/${member.discordId
     gap: 0.9rem;
   }
 
-  .initial {
-    display: grid;
-    place-items: center;
+  .avatar {
     flex: none;
     width: 2.75rem;
     height: 2.75rem;
     border: 1px solid var(--cyan);
     border-radius: 50%;
     background: #000;
+    object-fit: cover;
+    box-shadow: 0 0 10px -2px var(--glow);
+  }
+
+  .initial {
+    display: grid;
+    place-items: center;
     font-family: var(--font-logo);
     font-size: 1.35rem;
     line-height: 1;
     color: var(--cyan);
-    box-shadow: 0 0 10px -2px var(--glow);
   }
 
   h3 {

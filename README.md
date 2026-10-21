@@ -61,6 +61,28 @@ Mit `discordId` wird der Discord-Name zum Link auf das Profil. Die ID findest du
 Einstellungen → Erweitert → Entwicklermodus aktivieren, danach Rechtsklick auf den Benutzer → „Benutzer-ID kopieren“.
 Bitte nur Mitglieder eintragen, die der Veröffentlichung zugestimmt haben.
 
+### Discord-Sync
+
+Zusätzlich zu den manuellen Einträgen holt der Build alle Discord-Mitglieder mit der Opt-in-Rolle
+(Standard: „Website“) samt Avatar. Wer manuell in `members.yaml` steht (gleiche `discordId` oder gleicher
+`discord`-Name), wird vom Sync ignoriert – so lassen sich Bio und Spiele ergänzen. Welche Discord-Rolle in welche
+Gruppe kommt, steht im Block `discord:` in `members.yaml`. Der Sync läuft bei jedem Deploy und täglich um 4 Uhr (UTC).
+
+Einmalig einrichten:
+
+1. Im [Discord Developer Portal](https://discord.com/developers/applications) eine Application anlegen,
+   unter **Bot** einen Token erzeugen und **Server Members Intent** aktivieren.
+2. Den Bot einladen: **OAuth2 → URL Generator**, Scope `bot`, keine Berechtigungen nötig.
+3. Auf dem Discord-Server die Rolle **Website** anlegen. Wer auf der Seite erscheinen möchte, nimmt sich die
+   Rolle (z. B. per Reaction-Role); Rolle entfernen = Eintrag verschwindet beim nächsten Sync.
+4. In GitHub unter **Settings → Secrets and variables → Actions**:
+   - Secret `DISCORD_BOT_TOKEN` = Bot-Token
+   - Variable `DISCORD_GUILD_ID` = Server-ID (Entwicklermodus → Rechtsklick auf den Server → „Server-ID kopieren“)
+   - optional Variable `DISCORD_OPTIN_ROLE`, falls die Rolle anders heißt
+
+Lokal testen: `.env` mit `DISCORD_BOT_TOKEN=…` und `DISCORD_GUILD_ID=…` anlegen (wird nicht committet), dann
+`npm run sync:discord` und `npm run dev`. Ohne Token zeigt die Seite nur die manuellen Einträge.
+
 ### Neuer Historie-Eintrag
 
 Neue Datei in `src/content/history/` mit `year` und `title` im Kopf. Die Einträge werden nach Jahr
