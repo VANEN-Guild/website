@@ -65,7 +65,7 @@ const member = z.object({
 
 // Ergänzungen für Mitglieder aus dem Discord-Sync (Name, Gruppe und Avatar kommen weiter aus Discord)
 const extra = member
-  .pick({ discord: true, discordId: true, games: true, bio: true })
+  .pick({ discord: true, discordId: true, since: true, games: true, bio: true })
   .refine((e) => e.discord || e.discordId, 'Bei extras ist discord oder discordId nötig');
 
 const members = defineCollection({

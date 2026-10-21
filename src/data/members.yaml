@@ -23,10 +23,12 @@ discord:
     WoW: [WoW]
 
 # Ergänzungen für Mitglieder aus dem Discord-Sync: Name, Gruppe und Avatar kommen weiter aus Discord,
-# games und bio von hier (games werden mit den Spielen aus den Discord-Rollen zusammengeführt).
+# since, games und bio von hier (since ersetzt das Beitrittsjahr zum Discord-Server,
+# games werden mit den Spielen aus den Discord-Rollen zusammengeführt).
 # Zuordnung über discord (Benutzername) oder discordId.
 extras: []
 #  - discord: alice
+#    since: 2001
 #    games: [Rift]
 #    bio: Healer aus Leidenschaft.
 

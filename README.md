@@ -84,12 +84,14 @@ Einmalig einrichten:
 
 - Spiele kommen automatisch aus Discord-Rollen: Unter `discord.games` in `members.yaml` steht, welche
   Discord-Rolle (z. B. per Reaction-Role vergeben) zu welchem Spiel gehört.
-- Zusätzliche Spiele oder eine Bio lassen sich unter `extras:` ergänzen – Zuordnung über den Discord-Namen,
+- Zusätzliche Spiele, eine Bio oder ein abweichendes „dabei seit“-Jahr (`since`, ersetzt das Beitrittsjahr
+  zum Discord-Server) lassen sich unter `extras:` ergänzen – Zuordnung über den Discord-Namen,
   Name, Gruppe und Avatar kommen weiterhin aus Discord:
 
   ```yaml
   extras:
     - discord: alice
+      since: 2001
       games: [Rift]
       bio: Healer aus Leidenschaft.
   ```
