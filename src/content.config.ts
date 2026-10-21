@@ -63,17 +63,25 @@ const member = z.object({
   bio: z.string().max(280, 'bio darf höchstens 280 Zeichen lang sein').optional(),
 });
 
+// Ergänzungen für Mitglieder aus dem Discord-Sync (Name, Gruppe und Avatar kommen weiter aus Discord)
+const extra = member
+  .pick({ discord: true, discordId: true, games: true, bio: true })
+  .refine((e) => e.discord || e.discordId, 'Bei extras ist discord oder discordId nötig');
+
 const members = defineCollection({
   loader: glob({ pattern: 'members.yaml', base: './src/data' }),
   schema: z
     .object({
       roles: z.array(z.string()).min(1),
       members: z.array(member).default([]),
+      extras: z.array(extra).default([]),
       // Zuordnung für Mitglieder aus dem Discord-Sync
       discord: z
         .object({
           defaultRole: z.string(),
           roles: z.record(z.string(), z.array(z.string())).default({}),
+          // Spiel auf der Seite → Discord-Rollennamen
+          games: z.record(z.string(), z.array(z.string())).default({}),
         })
         .optional(),
     })

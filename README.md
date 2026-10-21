@@ -80,6 +80,20 @@ Einmalig einrichten:
    - Variable `DISCORD_GUILD_ID` = Server-ID (Entwicklermodus → Rechtsklick auf den Server → „Server-ID kopieren“)
    - optional Variable `DISCORD_OPTIN_ROLE`, falls die Rolle anders heißt
 
+**Spiele und Bio für synchronisierte Mitglieder:**
+
+- Spiele kommen automatisch aus Discord-Rollen: Unter `discord.games` in `members.yaml` steht, welche
+  Discord-Rolle (z. B. per Reaction-Role vergeben) zu welchem Spiel gehört.
+- Zusätzliche Spiele oder eine Bio lassen sich unter `extras:` ergänzen – Zuordnung über den Discord-Namen,
+  Name, Gruppe und Avatar kommen weiterhin aus Discord:
+
+  ```yaml
+  extras:
+    - discord: alice
+      games: [Rift]
+      bio: Healer aus Leidenschaft.
+  ```
+
 Lokal testen: `.env` mit `DISCORD_BOT_TOKEN=…` und `DISCORD_GUILD_ID=…` anlegen (wird nicht committet), dann
 `npm run sync:discord` und `npm run dev`. Ohne Token zeigt die Seite nur die manuellen Einträge.
 

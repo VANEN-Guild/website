@@ -15,7 +15,20 @@ discord:
   # Gruppe auf der Seite → Discord-Rollennamen (die erste passende Gruppe gewinnt)
   roles:
     Leitung: [Leitung]
-    Offiziere: [Offizier, Offiziere]
+    Offiziere: [Offizier, Offiziere, "WoW Forever: Officer"]
+  # Spiel auf der Seite → Discord-Rollennamen (alle passenden Spiele werden angezeigt)
+  games:
+    DAoC: [DAoC, Dark Age of Camelot]
+    New World: [New World]
+    WoW: [WoW]
+
+# Ergänzungen für Mitglieder aus dem Discord-Sync: Name, Gruppe und Avatar kommen weiter aus Discord,
+# games und bio von hier (games werden mit den Spielen aus den Discord-Rollen zusammengeführt).
+# Zuordnung über discord (Benutzername) oder discordId.
+extras: []
+#  - discord: alice
+#    games: [Rift]
+#    bio: Healer aus Leidenschaft.
 
 members:
   # name:      Anzeigename (Pflicht)
