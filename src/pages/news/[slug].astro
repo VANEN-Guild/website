@@ -1,0 +1,79 @@
+---
+import { getEntry, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Icon from '../../components/Icon.astro';
+import { getNews } from '../../lib/news';
+import { formatDateTime } from '../../lib/dates';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  return (await getNews()).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+interface Props {
+  entry: CollectionEntry<'news'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const site = (await getEntry('site', 'site'))!.data;
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.teaser} type="article">
+  <article class="container section">
+    <PageHeader heading={entry.data.title}>
+      <a slot="before" class="back" href={url('/')}><Icon name="arrow-left" size={16} /> Alle News</a>
+      <p class="meta">
+        Publiziert am <time datetime={entry.data.date.toISOString()}>{formatDateTime(entry.data.date)}</time> von{' '}
+        {entry.data.author}
+      </p>
+    </PageHeader>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <aside class="cta panel">
+      <p>Lust, mit uns zu spielen? Schau auf unserem Discord vorbei.</p>
+      <a class="btn btn--primary" href={site.discord} target="_blank" rel="noopener noreferrer">
+        <Icon name="discord" size={18} /> Join our Discord
+      </a>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .meta {
+    margin: 0.9rem 0 0;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 72ch;
+    margin-top: 3rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .cta p {
+    margin: 0;
+    color: var(--text);
+  }
+</style>

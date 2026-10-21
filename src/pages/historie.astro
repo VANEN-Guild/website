@@ -1,0 +1,160 @@
+---
+import { getCollection, render } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const entries = (await getCollection('history')).sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
+const timeline = await Promise.all(entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })));
+---
+
+<PageLayout page="historie">
+  <nav class="jump" aria-label="Spiele">
+    <ul>
+      {
+        timeline.map(({ entry }) => (
+          <li>
+            <a href={`#${entry.id}`}>
+              <span class="year">{entry.data.year}</span> {entry.data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
+  <ol class="timeline">
+    {
+      timeline.map(({ entry, Content }) => (
+        <li id={entry.id} class="item">
+          <span class="year">{entry.data.year}</span>
+          <div class="body panel">
+            <h2>{entry.data.title}</h2>
+            <div class="prose">
+              <Content />
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</PageLayout>
+
+<style>
+  .jump ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2rem 0 3rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .jump a {
+    display: inline-flex;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition:
+      border-color 0.2s,
+      color 0.2s;
+  }
+
+  .jump a:hover {
+    color: #fff;
+    border-color: var(--cyan);
+  }
+
+  .jump .year {
+    font-weight: 700;
+    color: var(--cyan);
+  }
+
+  .timeline {
+    --rail: 5.5rem;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* senkrechte Leuchtlinie */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    bottom: 0;
+    left: calc(var(--rail) - 1.5rem);
+    width: 2px;
+    background: linear-gradient(180deg, var(--cyan), rgb(0 255 255 / 0.15) 85%, transparent);
+    box-shadow: 0 0 10px var(--glow);
+  }
+
+  .item {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    align-items: start;
+    padding-bottom: 2.5rem;
+  }
+
+  .item > .year {
+    position: sticky;
+    top: calc(var(--nav-h) + 26px + 1.25rem);
+    padding-top: 1.2rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--cyan);
+    text-shadow: 0 0 10px var(--glow);
+  }
+
+  /* Knoten auf der Linie */
+  .item::before {
+    content: '';
+    position: absolute;
+    top: 1.75rem;
+    left: calc(var(--rail) - 1.5rem - 5px);
+    width: 12px;
+    height: 12px;
+    background: #000;
+    border: 2px solid var(--cyan);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--glow);
+  }
+
+  .body {
+    padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+  }
+
+  .body h2 {
+    font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+  }
+
+  @media (max-width: 640px) {
+    .timeline {
+      --rail: 1.75rem;
+    }
+
+    .timeline::before {
+      left: 0.35rem;
+    }
+
+    .item::before {
+      left: calc(0.35rem - 5px);
+    }
+
+    .item > .year {
+      position: static;
+      grid-column: 2;
+      padding: 1.15rem 0 0.5rem;
+    }
+
+    .body {
+      grid-column: 2;
+    }
+  }
+</style>

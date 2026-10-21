@@ -1,0 +1,74 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import NewsCard from '../components/NewsCard.astro';
+import Icon from '../components/Icon.astro';
+import { getNews } from '../lib/news';
+import { url } from '../lib/url';
+
+const site = (await getEntry('site', 'site'))!.data;
+const page = (await getEntry('pages', 'home'))!;
+const { Content } = await render(page);
+const [latest, ...older] = await getNews();
+---
+
+<BaseLayout description={site.description}>
+  <div class="container section">
+    <section>
+      <PageHeader heading={page.data.heading ?? page.data.title} subtitle={page.data.subtitle} />
+      <div class="prose"><Content /></div>
+      <div class="actions">
+        <a class="btn btn--primary" href={site.discord} target="_blank" rel="noopener noreferrer">
+          <Icon name="discord" size={18} /> Join our Discord
+        </a>
+        <a class="btn btn--outline" href={url('/historie')}>Unsere Historie <Icon name="arrow-right" size={16} /></a>
+      </div>
+    </section>
+
+    <section aria-labelledby="news-heading">
+      <h2 id="news-heading" class="section-title">News</h2>
+      <div class="news">
+        {latest && <NewsCard entry={latest} featured />}
+        {older.map((entry) => <NewsCard entry={entry} />)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0.75rem 0 clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--line), transparent);
+  }
+
+  .news {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+    gap: 1.25rem;
+  }
+
+  .news > :global(.featured) {
+    grid-column: 1 / -1;
+  }
+</style>

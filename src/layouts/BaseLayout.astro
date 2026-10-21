@@ -1,0 +1,90 @@
+---
+import '@fontsource-variable/open-sans';
+import '../styles/global.css';
+import { getEntry } from 'astro:content';
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { img } from '../lib/images';
+import { url } from '../lib/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+
+const site = (await getEntry('site', 'site'))!.data;
+const { title, description = site.description, type = 'website', noindex = false } = Astro.props;
+
+const fullTitle = title ? `${title} – ${site.name}` : site.name;
+const canonical = new URL(Astro.url.pathname.replace(/index\.html$/, '').replace(/\.html$/, ''), Astro.site);
+const og = await getImage({ src: img('header-centered.jpg'), format: 'jpg' });
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <meta name="theme-color" content="#000000" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(og.src, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: site.name,
+      description: site.description,
+      foundingDate: '1998',
+      url: new URL(url('/'), Astro.site).href,
+      sameAs: [site.discord],
+    })} />
+  </head>
+  <body style={`--page-bg: url('${img('background.jpg').src}')`}>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    position: relative;
+    isolation: isolate;
+    flex: 1;
+  }
+
+  /* Hintergrund in Originalgröße (1140 px), seitlich weich ins Schwarz auslaufend */
+  main::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: -1;
+    height: 870px;
+    background: var(--page-bg) center top / auto no-repeat;
+    mask-image: linear-gradient(90deg, transparent calc(50% - 570px), #000 calc(50% - 470px), #000 calc(50% + 470px), transparent calc(50% + 570px));
+  }
+</style>

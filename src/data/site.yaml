@@ -1,0 +1,18 @@
+name: VANEN
+tagline: Successful online gaming since 1998
+description: VANEN ist eine Spielergemeinschaft, die seit 1998 gemeinsam Online-Gaming betreibt.
+email: mail@benjaminhirsch.net
+discord: https://discord.gg/CCjSC6T
+
+# Hauptmenü (der Discord-Link wird automatisch angehängt)
+nav:
+  - label: Home
+    href: /
+  - label: Historie
+    href: /historie
+
+footerNav:
+  - label: Impressum
+    href: /impressum
+  - label: Datenschutz
+    href: /datenschutz

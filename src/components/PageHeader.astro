@@ -1,0 +1,29 @@
+---
+interface Props {
+  heading: string;
+  subtitle?: string;
+}
+
+const { heading, subtitle } = Astro.props;
+---
+
+<div class="page-header">
+  <slot name="before" />
+  {subtitle && <p class="eyebrow">{subtitle}</p>}
+  <h1>{heading}</h1>
+  <slot />
+</div>
+
+<style>
+  .page-header {
+    margin-bottom: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+
+  /* Cyan-Unterstrich, der nach rechts ausläuft (wie auf der alten Seite) */
+  h1 {
+    margin: 0;
+    padding-bottom: 0.9rem;
+    background: linear-gradient(90deg, var(--cyan) 0%, rgb(0 255 255 / 0) 58%) left bottom / 100% 2px no-repeat;
+    max-width: 30ch;
+  }
+</style>

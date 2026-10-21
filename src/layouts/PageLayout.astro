@@ -1,0 +1,31 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+interface Props {
+  page: string;
+  showBody?: boolean;
+}
+
+const { page, showBody = true } = Astro.props;
+const entry = await getEntry('pages', page);
+if (!entry) throw new Error(`Seite nicht gefunden: src/content/pages/${page}.md`);
+const { Content } = await render(entry);
+const { title, description, heading, subtitle } = entry.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container section">
+    <PageHeader heading={heading ?? title} subtitle={subtitle} />
+    <slot name="before" />
+    {
+      showBody && entry.body?.trim() && (
+        <div class="prose">
+          <Content />
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</BaseLayout>

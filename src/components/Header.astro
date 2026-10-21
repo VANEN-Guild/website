@@ -1,0 +1,315 @@
+---
+import { getEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { img } from '../lib/images';
+import { url, currentPath } from '../lib/url';
+
+const site = (await getEntry('site', 'site'))!.data;
+const path = currentPath(Astro.url.pathname);
+const isActive = (href: string) => (href === '/' ? path === '/' || path.startsWith('/news') : path.startsWith(href));
+const vars = [
+  `--banner: url('${img('header-centered.jpg').src}')`,
+  `--ruler: url('${img('line.png').src}')`,
+  `--hinge-l: url('${img('hinge-left.png').src}')`,
+  `--hinge-r: url('${img('hinge-right.png').src}')`,
+].join(';');
+---
+
+<header class="site-header" style={vars}>
+  <div class="banner">
+    <a href={url('/')} class="brand">
+      <span class="logo">{site.name}</span>
+      <span class="tagline">{site.tagline}</span>
+    </a>
+  </div>
+
+  <div class="navbar">
+    <div class="frame bar">
+      <button class="toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <Icon name="menu" class="icon-open" />
+        <Icon name="close" class="icon-close" />
+        <span>Menü</span>
+      </button>
+
+      <nav id="main-nav" class="nav" aria-label="Hauptnavigation">
+        <ul>
+          {
+            site.nav.map((item) => (
+              <li>
+                <a href={url(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="discord" href={site.discord} target="_blank" rel="noopener noreferrer">
+          <Icon name="discord" size={18} />
+          Discord
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.site-header .toggle');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('nav-open', open);
+  });
+</script>
+
+<style>
+  .banner {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: clamp(8.5rem, 6rem + 8vw, 11.75rem);
+    padding: 1.5rem var(--gutter);
+    background: #000;
+    overflow: hidden;
+  }
+
+  /* Bild läuft zu den Seiten weich ins Schwarz aus */
+  .banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--banner) center / cover no-repeat;
+    max-width: 71.25rem;
+    margin-inline: auto;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .brand {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.35rem;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .logo {
+    font-family: var(--font-logo);
+    font-size: clamp(3rem, 2rem + 5vw, 5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-shadow:
+      0 0 10px var(--glow),
+      0 0 30px rgb(0 255 194 / 0.25);
+    transition: text-shadow 0.3s;
+  }
+
+  .brand:hover .logo {
+    text-shadow:
+      0 0 14px var(--glow),
+      0 0 40px rgb(0 255 194 / 0.45);
+  }
+
+  .tagline {
+    font-size: clamp(0.6rem, 0.55rem + 0.2vw, 0.72rem);
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  /* Menüleiste zwischen zwei Metall-Leisten mit Scharnieren (wie auf der alten Seite) */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #000;
+  }
+
+  /* sticky braucht den Header als Ganzes nicht – nur die Leiste klebt */
+  .site-header {
+    display: contents;
+  }
+
+  .frame {
+    position: relative;
+    max-width: 71.25rem;
+    margin-inline: auto;
+    padding: 13px var(--gutter);
+    background:
+      linear-gradient(180deg, rgb(0 255 255 / 0.1), transparent 30%),
+      linear-gradient(180deg, #003c3c 0%, #002424 55%, #001a1a 100%);
+    box-shadow:
+      inset 0 14px 0 -13px rgb(0 255 255 / 0.35),
+      0 10px 24px -10px rgb(0 0 0 / 0.9);
+  }
+
+  .frame::before,
+  .frame::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 13px;
+    background:
+      var(--hinge-l) left center no-repeat,
+      var(--hinge-r) right center no-repeat,
+      var(--ruler) center / auto 13px repeat-x;
+  }
+
+  .frame::before {
+    top: 0;
+  }
+
+  .frame::after {
+    bottom: 0;
+    transform: rotate(180deg);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    min-height: calc(var(--nav-h) + 26px);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* Link-Padding ausgleichen, damit der Text bündig mit dem Inhalt ist */
+  .nav ul {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0 0 0 -1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px rgb(0 0 0 / 0.5);
+  }
+
+  .nav ul a {
+    position: relative;
+    display: block;
+    padding: 0.85rem 1rem;
+    color: var(--cyan);
+  }
+
+  .nav ul a::after {
+    content: '';
+    position: absolute;
+    inset: auto 1rem 0.55rem;
+    height: 2px;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--glow);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  .nav ul a:hover,
+  .nav ul a[aria-current='page'] {
+    color: #fff;
+  }
+
+  .nav ul a:hover::after,
+  .nav ul a[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  .discord {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid rgb(0 255 255 / 0.45);
+    border-radius: var(--radius);
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+  }
+
+  .discord:hover {
+    color: #fff;
+    border-color: var(--cyan);
+    background: var(--cyan-soft);
+  }
+
+  .toggle {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    background: none;
+    border: 0;
+    color: #fff;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .toggle :global(.icon-close),
+  :global(.nav-open) .toggle :global(.icon-open) {
+    display: none;
+  }
+
+  :global(.nav-open) .toggle :global(.icon-close) {
+    display: block;
+  }
+
+  @media (max-width: 640px) {
+    .toggle {
+      display: inline-flex;
+    }
+
+    .nav {
+      display: none;
+      position: absolute;
+      inset: 100% 0 auto;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem var(--gutter) 1.25rem;
+      background: #001a1a;
+      box-shadow: 0 16px 24px -12px #000;
+      border-bottom: 1px solid var(--line);
+    }
+
+    :global(.nav-open) .nav {
+      display: flex;
+    }
+
+    .nav ul {
+      flex-direction: column;
+      margin-left: 0;
+    }
+
+    .nav ul a {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav ul a::after {
+      inset: auto auto 0.6rem 0;
+      width: 1.5rem;
+    }
+
+    .discord {
+      justify-content: center;
+      padding: 0.75rem;
+    }
+  }
+</style>

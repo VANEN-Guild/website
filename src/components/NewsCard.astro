@@ -1,0 +1,119 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { formatDate } from '../lib/dates';
+import { url } from '../lib/url';
+
+interface Props {
+  entry: CollectionEntry<'news'>;
+  featured?: boolean;
+}
+
+const { entry, featured = false } = Astro.props;
+const href = url(`/news/${entry.id}`);
+---
+
+<article class:list={['card', 'panel', { featured }]}>
+  <p class="meta">
+    <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time> · {entry.data.author}
+  </p>
+  <h2><a href={href}>{entry.data.title}</a></h2>
+  <p class="teaser">{entry.data.teaser}</p>
+  <span class="more" aria-hidden="true">Mehr lesen <Icon name="arrow-right" size={16} /></span>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    transition:
+      box-shadow 0.25s,
+      transform 0.25s,
+      background-color 0.25s;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--cyan), transparent);
+    opacity: 0.5;
+    transition: opacity 0.25s;
+  }
+
+  .card:hover,
+  .card:focus-within {
+    background-color: var(--surface-strong);
+    box-shadow:
+      0 0 0 1px rgb(0 255 255 / 0.45),
+      0 0 24px -6px var(--glow);
+    transform: translateY(-2px);
+  }
+
+  .card:hover::before,
+  .card:focus-within::before {
+    opacity: 1;
+  }
+
+  .meta {
+    margin: 0 0 0.5rem;
+  }
+
+  h2 {
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+  }
+
+  /* gleiche Größe wie die Titel auf der Historie-Seite */
+  .featured h2 {
+    font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+  }
+
+  h2 a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* gesamte Karte klickbar */
+  h2 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  h2 a:focus-visible {
+    outline: none;
+  }
+
+  .card:has(a:focus-visible) {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
+
+  .teaser {
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  .card:hover .more :global(.icon) {
+    transform: translateX(3px);
+  }
+
+  .more :global(.icon) {
+    transition: transform 0.2s;
+  }
+</style>

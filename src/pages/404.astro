@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { url } from '../lib/url';
+---
+
+<BaseLayout title="Seite nicht gefunden" noindex>
+  <div class="container section">
+    <PageHeader heading="Seite nicht gefunden" subtitle="Fehler 404" />
+    <div class="prose">
+      <p>
+        Diese Seite existiert nicht oder wurde entfernt. Zurück zur <a href={url('/')}>Startseite</a> oder zu unserer
+        <a href={url('/historie')}>Historie</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
