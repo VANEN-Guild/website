@@ -14,7 +14,7 @@ discord:
   defaultRole: Mitglieder
   # Gruppe auf der Seite → Discord-Rollennamen (die erste passende Gruppe gewinnt)
   roles:
-    Leitung: [Leitung]
+    Leitung: [LEAD]
     Offiziere: [Offizier, Offiziere, "WoW Forever: Officer"]
   # Spiel auf der Seite → Discord-Rollennamen (alle passenden Spiele werden angezeigt)
   games:
@@ -23,16 +23,20 @@ discord:
     WoW: [WoW]
 
 # Ergänzungen für Mitglieder aus dem Discord-Sync: Name, Gruppe und Avatar kommen weiter aus Discord,
-# since, games und bio von hier (since ersetzt das Beitrittsjahr zum Discord-Server,
+# since, games und bio von hier ("dabei seit" erscheint nur, wenn since hier angegeben ist;
 # games werden mit den Spielen aus den Discord-Rollen zusammengeführt).
 # Zuordnung über discord (Benutzername) oder discordId.
-extras: []
+extras:
 #  - discord: alice
 #    since: 2001
 #    games: [Rift]
 #    bio: Healer aus Leidenschaft.
+  - discord: b3n
+    since: 1998
+  - discord: neil0r
+    since: 1998
 
-members:
+members: []
   # name:      Anzeigename (Pflicht)
   # role:      eine der Gruppen oben (Pflicht)
   # discord:   Discord-Benutzername (optional)
@@ -40,16 +44,3 @@ members:
   # since:     dabei seit (Jahr, optional)
   # games:     gespielte Spiele (optional)
   # bio:       kurzer Text, max. 280 Zeichen (optional)
-
-  - name: B3N
-    role: Leitung
-    discord: b3n
-    discordId: "240895521621803008"
-    since: 1998
-    games: [Quake III, DAoC, WoW, Rift]
-
-  - name: Neil
-    role: Leitung
-    since: 1998
-    discord: neil0r
-    games: [Quake III, DAoC, WoW, Rift]

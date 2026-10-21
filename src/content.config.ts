@@ -110,7 +110,6 @@ const discordMembers = defineCollection({
         username: z.string(),
         displayName: z.string(),
         roles: z.array(z.string()),
-        joinedAt: z.string(),
         avatar: z.boolean(),
       }),
     ),

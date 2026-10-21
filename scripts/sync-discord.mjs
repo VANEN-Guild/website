@@ -85,7 +85,6 @@ try {
       username: m.user.username,
       displayName: m.nick || m.user.global_name || m.user.username,
       roles: m.roles.filter((id) => id !== optIn.id).map((id) => roleNames.get(id)).filter(Boolean),
-      joinedAt: m.joined_at,
       avatar,
     });
   }

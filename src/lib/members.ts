@@ -40,8 +40,7 @@ export async function getMemberGroups() {
               discord.defaultRole,
             discord: d.username,
             discordId: d.id,
-            // Beitritt zum Discord-Server, außer extras gibt ein Jahr vor
-            since: extra?.since ?? new Date(d.joinedAt).getFullYear(),
+            since: extra?.since,
             games: [...new Set([...(extra?.games ?? []), ...roleGames])],
             bio: extra?.bio,
           };
