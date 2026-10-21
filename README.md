@@ -12,6 +12,7 @@ GitHub-Web-Editor bearbeitet werden. Nach ein bis zwei Minuten ist die Änderung
 | --- | --- |
 | Name, Tagline, Discord-Link, E-Mail, Menü | `src/data/site.yaml` |
 | Startseite (Begrüßungstext) | `src/content/pages/home.md` |
+| Mitglieder | `src/data/members.yaml` (Einleitung: `src/content/pages/mitglieder.md`) |
 | Historie (Einleitung) | `src/content/pages/historie.md` |
 | Historie (ein Eintrag pro Spiel) | `src/content/history/*.md` |
 | News (ein Artikel pro Datei) | `src/content/news/*.md` |
@@ -40,6 +41,25 @@ Hier steht der eigentliche Artikel in **Markdown**.
 ```
 
 Mit `draft: true` im Kopf wird ein Artikel nicht veröffentlicht.
+
+### Mitglied eintragen
+
+In `src/data/members.yaml` unter `members:` einen Eintrag ergänzen. Nur `name` und `role` sind Pflicht;
+`role` muss eine der Gruppen unter `roles:` sein (sonst bricht der Build mit einer Fehlermeldung ab).
+
+```yaml
+  - name: B3N
+    role: Leitung
+    discord: b3n
+    discordId: '123456789012345678'
+    since: 1998
+    games: [DAoC, WoW]
+    bio: Kurzer Text über dich (max. 280 Zeichen).
+```
+
+Mit `discordId` wird der Discord-Name zum Link auf das Profil. Die ID findest du in Discord unter
+Einstellungen → Erweitert → Entwicklermodus aktivieren, danach Rechtsklick auf den Benutzer → „Benutzer-ID kopieren“.
+Bitte nur Mitglieder eintragen, die der Veröffentlichung zugestimmt haben.
 
 ### Neuer Historie-Eintrag
 

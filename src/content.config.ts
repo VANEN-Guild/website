@@ -48,4 +48,39 @@ const site = defineCollection({
   }),
 });
 
-export const collections = { pages, news, history, site };
+const member = z.object({
+  name: z.string(),
+  role: z.string(),
+  // Discord-Benutzername, z. B. "b3n"
+  discord: z.string().optional(),
+  // Discord-Benutzer-ID (Entwicklermodus → Rechtsklick → „Benutzer-ID kopieren“), verlinkt das Profil
+  discordId: z
+    .string()
+    .regex(/^\d{17,20}$/, 'discordId muss eine Discord-Benutzer-ID sein (17–20 Ziffern, in Anführungszeichen)')
+    .optional(),
+  since: z.number().int().min(1998).optional(),
+  games: z.array(z.string()).default([]),
+  bio: z.string().max(280, 'bio darf höchstens 280 Zeichen lang sein').optional(),
+});
+
+const members = defineCollection({
+  loader: glob({ pattern: 'members.yaml', base: './src/data' }),
+  schema: z
+    .object({
+      roles: z.array(z.string()).min(1),
+      members: z.array(member).default([]),
+    })
+    .superRefine(({ roles, members }, ctx) => {
+      members.forEach((m, i) => {
+        if (!roles.includes(m.role)) {
+          ctx.addIssue({
+            code: 'custom',
+            path: ['members', i, 'role'],
+            message: `Unbekannte Rolle „${m.role}“ bei ${m.name}. Erlaubt: ${roles.join(', ')}`,
+          });
+        }
+      });
+    }),
+});
+
+export const collections = { pages, news, history, site, members };

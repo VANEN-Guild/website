@@ -1,0 +1,30 @@
+# Mitgliederliste – erscheint unter /mitglieder.
+# Bitte nur Mitglieder eintragen, die der Veröffentlichung zugestimmt haben.
+
+# Gruppen in der Reihenfolge, in der sie auf der Seite erscheinen
+roles:
+  - Leitung
+  - Offiziere
+  - Mitglieder
+
+members:
+  # name:      Anzeigename (Pflicht)
+  # role:      eine der Gruppen oben (Pflicht)
+  # discord:   Discord-Benutzername (optional)
+  # discordId: Discord-Benutzer-ID in Anführungszeichen, verlinkt das Profil (optional)
+  # since:     dabei seit (Jahr, optional)
+  # games:     gespielte Spiele (optional)
+  # bio:       kurzer Text, max. 280 Zeichen (optional)
+
+  - name: B3N
+    role: Leitung
+    discord: b3n
+    discordId: "240895521621803008"
+    since: 1998
+    games: [Quake III, DAoC, WoW, Rift]
+
+  - name: Neil
+    role: Leitung
+    since: 1998
+    discord: neil0r
+    games: [Quake III, DAoC, WoW, Rift]

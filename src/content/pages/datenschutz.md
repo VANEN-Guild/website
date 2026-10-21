@@ -24,17 +24,20 @@ Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und die Zwec
 ### Kategorien betroffener Personen
 
 - Kommunikationspartner.
+- Mitglieder.
 - Nutzer (z. B. Webseitenbesucher, Nutzer von Onlinediensten).
 
 ### Zwecke der Verarbeitung
 
 - Bereitstellung unseres Onlineangebotes und Nutzerfreundlichkeit.
 - Kontaktanfragen und Kommunikation.
+- Vorstellung der Spielergemeinschaft (Mitgliederliste).
 
 ## Maßgebliche Rechtsgrundlagen
 
 Im Folgenden erhalten Sie eine Übersicht der Rechtsgrundlagen der DSGVO, auf deren Basis wir personenbezogene Daten verarbeiten. Bitte nehmen Sie zur Kenntnis, dass neben den Regelungen der DSGVO nationale Datenschutzvorgaben in Ihrem bzw. unserem Wohn- oder Sitzland gelten können. Sollten ferner im Einzelfall speziellere Rechtsgrundlagen maßgeblich sein, teilen wir Ihnen diese in der Datenschutzerklärung mit.
 
+- **Einwilligung (Art. 6 Abs. 1 S. 1 lit. a. DSGVO)** – Die betroffene Person hat ihre Einwilligung in die Verarbeitung der sie betreffenden personenbezogenen Daten für einen spezifischen Zweck oder mehrere bestimmte Zwecke gegeben.
 - **Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO)** – Die Verarbeitung ist zur Wahrung der berechtigten Interessen des Verantwortlichen oder eines Dritten erforderlich, sofern nicht die Interessen oder Grundrechte und Grundfreiheiten der betroffenen Person, die den Schutz personenbezogener Daten erfordern, überwiegen.
 
 **Nationale Datenschutzregelungen in Deutschland:** Zusätzlich zu den Datenschutzregelungen der Datenschutz-Grundverordnung gelten nationale Regelungen zum Datenschutz in Deutschland. Hierzu gehört insbesondere das Gesetz zum Schutz vor Missbrauch personenbezogener Daten bei der Datenverarbeitung (Bundesdatenschutzgesetz – BDSG). Das BDSG enthält insbesondere Spezialregelungen zum Recht auf Auskunft, zum Recht auf Löschung, zum Widerspruchsrecht, zur Verarbeitung besonderer Kategorien personenbezogener Daten, zur Verarbeitung für andere Zwecke und zur Übermittlung sowie automatisierten Entscheidungsfindung im Einzelfall einschließlich Profiling. Ferner können Landesdatenschutzgesetze der einzelnen Bundesländer zur Anwendung gelangen.
@@ -65,6 +68,15 @@ Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitu
 - **Betroffene Personen:** Kommunikationspartner.
 - **Zwecke der Verarbeitung:** Kontaktanfragen und Kommunikation.
 - **Rechtsgrundlagen:** Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f. DSGVO).
+
+## Mitgliederliste
+
+Auf der Seite „Mitglieder“ veröffentlichen wir Angaben zu Mitgliedern unserer Spielergemeinschaft (Anzeigename, Rolle, ggf. Discord-Benutzername und -Profil-Link, Jahr des Beitritts, gespielte Spiele und eine selbst verfasste Kurzbeschreibung). Die Veröffentlichung erfolgt nur mit Einwilligung der jeweiligen Person. Die Einwilligung kann jederzeit per Discord oder E-Mail widerrufen werden; der Eintrag wird dann entfernt.
+
+- **Verarbeitete Datenarten:** Bestandsdaten (z. B. Namen), Inhaltsdaten (z. B. Kurzbeschreibung).
+- **Betroffene Personen:** Mitglieder.
+- **Zwecke der Verarbeitung:** Vorstellung der Spielergemeinschaft.
+- **Rechtsgrundlagen:** Einwilligung (Art. 6 Abs. 1 S. 1 lit. a. DSGVO).
 
 ## Links zu externen Diensten
 

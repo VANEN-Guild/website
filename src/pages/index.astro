@@ -44,24 +44,6 @@ const [latest, ...older] = await getNews();
     margin: 0.75rem 0 clamp(2.5rem, 2rem + 2vw, 3.5rem);
   }
 
-  .section-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.85rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--cyan);
-  }
-
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, var(--line), transparent);
-  }
-
   .news {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));

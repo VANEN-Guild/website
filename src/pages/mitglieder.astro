@@ -1,0 +1,65 @@
+---
+import { getEntry } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import MemberCard from '../components/MemberCard.astro';
+import Icon from '../components/Icon.astro';
+
+const site = (await getEntry('site', 'site'))!.data;
+const { roles, members } = (await getEntry('members', 'members'))!.data;
+
+const groups = roles
+  .map((role) => ({
+    role,
+    members: members.filter((m) => m.role === role).sort((a, b) => a.name.localeCompare(b.name, 'de')),
+  }))
+  .filter((group) => group.members.length > 0);
+---
+
+<PageLayout page="mitglieder">
+  {
+    groups.map((group) => (
+      <section class="group" aria-label={group.role}>
+        <h2 class="section-title">{group.role}</h2>
+        <div class="grid">
+          {group.members.map((member) => (
+            <MemberCard member={member} />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <aside class="cta panel">
+    <p>Du bist Mitglied und möchtest hier auftauchen? Melde dich bei uns im Discord.</p>
+    <a class="btn btn--primary" href={site.discord} target="_blank" rel="noopener noreferrer">
+      <Icon name="discord" size={18} /> Join our Discord
+    </a>
+  </aside>
+</PageLayout>
+
+<style>
+  .group {
+    margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    gap: 1.25rem;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .cta p {
+    margin: 0;
+    color: var(--text);
+  }
+</style>

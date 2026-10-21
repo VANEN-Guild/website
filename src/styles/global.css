@@ -208,6 +208,25 @@ small {
   color: var(--muted);
 }
 
+/* Abschnittsüberschrift mit auslaufender Linie, z. B. „News“ */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line), transparent);
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
