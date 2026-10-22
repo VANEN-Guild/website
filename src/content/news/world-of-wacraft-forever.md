@@ -14,6 +14,7 @@ Viele von uns stehen mitten im Leben, haben Familie und berufliche Verpflichtung
 Für unser Abenteuer auf den *World of Warcraft Forever*-Servern peilen wir langfristig und nachhaltig Folgendes an:
 * **Eigene Raids:** Aufbau eines festen, eingespielten Raidkaders, um entspannt und zielorientiert den Endcontent zu erleben.
 * **Regelmäßige Dungeon-Runs:** Ob zum Ausrüsten, Twinks leveln oder einfach zum gemeinsamen Quatschen - wir ziehen regelmäßig zusammen los.
+* **Battleground Groups:** Abseits von Raids und Dungeons, machen viele von uns regelmäßig PvP.
 * **Miteinander statt Anonymität:** Bei VANEN bist du keine Nummer, sondern ein fester Teil unserer Community.
 
 ### 🎧 Was bieten wir dir?
