@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -32,6 +32,22 @@ const history = defineCollection({
     year: z.number(),
     title: z.string(),
     order: z.number().default(0),
+  }),
+});
+
+const games = defineCollection({
+  // Ein Eintrag pro aktuell gespieltem Spiel, angezeigt auf /spiele
+  loader: glob({ pattern: '*.md', base: './src/content/games' }),
+  schema: z.object({
+    title: z.string(),
+    // false = nicht mehr auf der Seite (z. B. wenn das Spiel nur noch in die Historie gehört)
+    active: z.boolean().default(true),
+    order: z.number().default(0),
+    facts: z.array(z.object({ label: z.string(), value: z.coerce.string() })).default([]),
+    recruiting: z.boolean().default(false),
+    recruitingNote: z.string().optional(),
+    // Dateinamen der News ohne .md, z. B. world-of-warcraft-forever
+    news: z.array(reference('news')).default([]),
   }),
 });
 
@@ -116,4 +132,4 @@ const discordMembers = defineCollection({
   }),
 });
 
-export const collections = { pages, news, history, site, members, discordMembers };
+export const collections = { pages, news, history, games, site, members, discordMembers };

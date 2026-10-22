@@ -15,6 +15,7 @@ GitHub-Web-Editor bearbeitet werden. Nach ein bis zwei Minuten ist die Änderung
 | Mitglieder | `src/data/members.yaml` (Einleitung: `src/content/pages/mitglieder.md`) |
 | Historie (Einleitung) | `src/content/pages/historie.md` |
 | Historie (ein Eintrag pro Spiel) | `src/content/history/*.md` |
+| Spiele (ein Eintrag pro aktivem Spiel) | `src/content/games/*.md` (Einleitung: `src/content/pages/spiele.md`) |
 | News (ein Artikel pro Datei) | `src/content/news/*.md` |
 | Impressum, Datenschutz | `src/content/pages/*.md` |
 | Bilder | `src/assets/img/` |
@@ -103,6 +104,28 @@ Lokal testen: `.env` mit `DISCORD_BOT_TOKEN=…` und `DISCORD_GUILD_ID=…` anle
 
 Neue Datei in `src/content/history/` mit `year` und `title` im Kopf. Die Einträge werden nach Jahr
 absteigend sortiert; bei gleichem Jahr entscheidet `order` (kleiner = weiter oben).
+
+### Spiele pflegen
+
+Die Seite „Spiele“ zeigt alle Einträge aus `src/content/games/` mit `active: true`. Unter dem Kopf
+folgt eine kurze Beschreibung in Markdown.
+
+```yaml
+---
+title: "World of Warcraft: Forever"
+active: true          # false = ausblenden
+order: 0              # Reihenfolge (kleiner = weiter oben)
+facts:                # beliebige Label/Wert-Paare
+  - { label: Servertyp, value: Normal (PvE) }
+  - { label: Fraktion, value: Allianz }
+recruiting: true      # Hinweis „Wir suchen Mitspieler:innen“ mit Discord-Button
+recruitingNote: Deutschsprachig, jedes Alter   # optional
+news:                 # Dateinamen der News ohne .md
+  - world-of-warcraft-forever
+---
+```
+
+Ein falscher News-Name lässt den Build mit einer Fehlermeldung abbrechen.
 
 ## Lokale Entwicklung
 

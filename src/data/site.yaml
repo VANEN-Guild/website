@@ -8,6 +8,8 @@ discord: https://discord.gg/CCjSC6T
 nav:
   - label: Home
     href: /
+  - label: Spiele
+    href: /spiele
   - label: Mitglieder
     href: /mitglieder
   - label: Historie

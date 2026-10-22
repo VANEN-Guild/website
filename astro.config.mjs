@@ -12,5 +12,9 @@ export default defineConfig({
   base,
   trailingSlash: 'ignore',
   build: { format: 'file' },
+  // Alte Adressen umbenannter Seiten (Ziel braucht den Base-Path, Astro ergänzt ihn hier nicht)
+  redirects: {
+    '/news/world-of-wacraft-forever': `${base.replace(/\/$/, '')}/news/world-of-warcraft-forever`,
+  },
   integrations: [sitemap()],
 });
