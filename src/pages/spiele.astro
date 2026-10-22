@@ -1,8 +1,10 @@
 ---
 import { getCollection, getEntries, getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import PageLayout from '../layouts/PageLayout.astro';
-import NewsCard from '../components/NewsCard.astro';
 import Icon from '../components/Icon.astro';
+import { formatDate } from '../lib/dates';
+import { url } from '../lib/url';
 
 const site = (await getEntry('site', 'site'))!.data;
 const entries = (await getCollection('games', ({ data }) => data.active)).sort(
@@ -26,7 +28,10 @@ const games = await Promise.all(
     games.map(({ game, Content, news }) => (
       <section id={game.id} class="game panel" aria-labelledby={`${game.id}-title`}>
         <header class="head">
-          <h2 id={`${game.id}-title`}>{game.data.title}</h2>
+          <div class="name">
+            {game.data.logo && <Image class="logo" src={game.data.logo} alt="" height={160} />}
+            <h2 id={`${game.id}-title`}>{game.data.title}</h2>
+          </div>
           {game.data.recruiting && <span class="badge">Wir suchen Mitspieler:innen</span>}
         </header>
 
@@ -57,11 +62,17 @@ const games = await Promise.all(
         {news.length > 0 && (
           <div class="news">
             <h3 class="section-title">News zum Spiel</h3>
-            <div class="grid">
+            <ul class="news-list">
               {news.map((entry) => (
-                <NewsCard entry={entry} />
+                <li>
+                  <a href={url(`/news/${entry.id}`)}>
+                    <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time>
+                    <span class="title">{entry.data.title}</span>
+                    <Icon name="arrow-right" size={16} />
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         )}
       </section>
@@ -86,6 +97,40 @@ const games = await Promise.all(
     justify-content: space-between;
     gap: 0.75rem 1rem;
     margin-bottom: 1.5rem;
+  }
+
+  .name {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  /* Logo höchstens 5rem hoch, breite Schriftzüge dürfen breiter werden */
+  .logo {
+    flex: none;
+    width: auto;
+    max-width: min(10rem, 35vw);
+    height: auto;
+    max-height: 5rem;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgb(0 0 0 / 0.8));
+  }
+
+  @media (max-width: 640px) {
+    .head {
+      flex-direction: column;
+    }
+
+    .name {
+      flex-direction: column;
+      gap: 0.75rem;
+      text-align: center;
+    }
+
+    .logo {
+      max-width: 12rem;
+    }
   }
 
   .head h2 {
@@ -188,9 +233,62 @@ const games = await Promise.all(
     margin-top: 2.5rem;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
-    gap: 1.25rem;
+  .news-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .news-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.75rem 0.25rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--text);
+    text-decoration: none;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .news-list a:hover {
+    color: var(--cyan);
+    background: var(--cyan-soft);
+  }
+
+  .news-list time {
+    flex: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .news-list .title {
+    flex: 1;
+    font-weight: 600;
+  }
+
+  .news-list :global(.icon) {
+    flex: none;
+    align-self: center;
+    color: var(--cyan);
+    transition: transform 0.2s;
+  }
+
+  .news-list a:hover :global(.icon) {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    .news-list a {
+      flex-wrap: wrap;
+      gap: 0.15rem 1rem;
+    }
+
+    .news-list time {
+      flex-basis: 100%;
+    }
   }
 </style>

@@ -113,6 +113,7 @@ folgt eine kurze Beschreibung in Markdown.
 ```yaml
 ---
 title: "World of Warcraft: Forever"
+logo: ./logos/wow-forever.png   # optional, Pfad relativ zur .md-Datei
 active: true          # false = ausblenden
 order: 0              # Reihenfolge (kleiner = weiter oben)
 facts:                # beliebige Label/Wert-Paare
@@ -124,6 +125,9 @@ news:                 # Dateinamen der News ohne .md
   - world-of-warcraft-forever
 ---
 ```
+
+Logos kommen nach `src/content/games/logos/` – am besten PNG, WebP oder SVG mit transparentem Hintergrund.
+Sie werden höchstens 5rem hoch angezeigt.
 
 Ein falscher News-Name lässt den Build mit einer Fehlermeldung abbrechen.
 

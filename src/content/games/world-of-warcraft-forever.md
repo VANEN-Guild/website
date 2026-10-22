@@ -1,5 +1,6 @@
 ---
 title: "World of Warcraft: Forever"
+logo: ./logos/wow-forever.png
 active: true
 order: 0
 facts:
@@ -7,7 +8,7 @@ facts:
   - { label: Region, value: EU }
   - { label: Servertyp, value: Normal (PvE) }
   - { label: Fraktion, value: Allianz }
-  - { label: Zum Start, value: über 30 Mitglieder }
+  - { label: Mitglieder, value: 30+ zum Start }
 recruiting: true
 recruitingNote: Wir suchen deutschsprachige Mitspieler:innen jeden Alters und jeder Erfahrungsstufe – ob Neuling, Veteran:in oder Wiedereinsteiger:in.
 news:

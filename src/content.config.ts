@@ -38,17 +38,20 @@ const history = defineCollection({
 const games = defineCollection({
   // Ein Eintrag pro aktuell gespieltem Spiel, angezeigt auf /spiele
   loader: glob({ pattern: '*.md', base: './src/content/games' }),
-  schema: z.object({
-    title: z.string(),
-    // false = nicht mehr auf der Seite (z. B. wenn das Spiel nur noch in die Historie gehört)
-    active: z.boolean().default(true),
-    order: z.number().default(0),
-    facts: z.array(z.object({ label: z.string(), value: z.coerce.string() })).default([]),
-    recruiting: z.boolean().default(false),
-    recruitingNote: z.string().optional(),
-    // Dateinamen der News ohne .md, z. B. world-of-warcraft-forever
-    news: z.array(reference('news')).default([]),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      // Pfad relativ zur .md-Datei, z. B. ./logos/wow-forever.png (PNG/WebP/SVG, am besten transparent)
+      logo: image().optional(),
+      // false = nicht mehr auf der Seite (z. B. wenn das Spiel nur noch in die Historie gehört)
+      active: z.boolean().default(true),
+      order: z.number().default(0),
+      facts: z.array(z.object({ label: z.string(), value: z.coerce.string() })).default([]),
+      recruiting: z.boolean().default(false),
+      recruitingNote: z.string().optional(),
+      // Dateinamen der News ohne .md, z. B. world-of-warcraft-forever
+      news: z.array(reference('news')).default([]),
+    }),
 });
 
 const site = defineCollection({
