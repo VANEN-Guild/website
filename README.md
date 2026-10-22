@@ -64,8 +64,9 @@ Bitte nur Mitglieder eintragen, die der Veröffentlichung zugestimmt haben.
 
 ### Discord-Sync
 
-Zusätzlich zu den manuellen Einträgen holt der Build alle Discord-Mitglieder mit der Opt-in-Rolle
-(Standard: „Website“) samt Avatar. Wer manuell in `members.yaml` steht (gleiche `discordId` oder gleicher
+Zusätzlich zu den manuellen Einträgen holt der Build alle Discord-Mitglieder, die **sowohl** die
+Mitgliedsrolle (Standard: „VANEN“) **als auch** die Opt-in-Rolle (Standard: „Website“) haben, samt Avatar.
+Gäste mit „Website“, aber ohne „VANEN“ erscheinen nicht. Wer manuell in `members.yaml` steht (gleiche `discordId` oder gleicher
 `discord`-Name), wird vom Sync ignoriert – so lassen sich Bio und Spiele ergänzen. Welche Discord-Rolle in welche
 Gruppe kommt, steht im Block `discord:` in `members.yaml`. Der Sync läuft bei jedem Deploy und stündlich (jeweils um xx:17 UTC, GitHub startet geplante Läufe oft einige Minuten später).
 
@@ -79,7 +80,8 @@ Einmalig einrichten:
 4. In GitHub unter **Settings → Secrets and variables → Actions**:
    - Secret `DISCORD_BOT_TOKEN` = Bot-Token
    - Variable `DISCORD_GUILD_ID` = Server-ID (Entwicklermodus → Rechtsklick auf den Server → „Server-ID kopieren“)
-   - optional Variable `DISCORD_OPTIN_ROLE`, falls die Rolle anders heißt
+   - optional Variable `DISCORD_OPTIN_ROLE`, falls die Opt-in-Rolle anders heißt
+   - optional Variable `DISCORD_MEMBER_ROLE`, falls die Mitgliedsrolle nicht „VANEN“ heißt
 
 **Spiele und Bio für synchronisierte Mitglieder:**
 

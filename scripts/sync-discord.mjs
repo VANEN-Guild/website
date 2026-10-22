@@ -1,15 +1,17 @@
-// Holt alle Discord-Mitglieder mit der Opt-in-Rolle und lädt ihre Avatare herunter.
+// Holt alle Discord-Mitglieder mit Mitglieds- und Opt-in-Rolle und lädt ihre Avatare herunter.
 // Ergebnis: src/data/discord-members.json und src/assets/img/discord/<id>.png (beides nicht im Repo).
 //
 // Umgebung:
 //   DISCORD_BOT_TOKEN   Bot-Token (ohne Token wird der Sync übersprungen)
 //   DISCORD_GUILD_ID    ID des Discord-Servers
 //   DISCORD_OPTIN_ROLE  Name oder ID der Opt-in-Rolle (Standard: Website)
+//   DISCORD_MEMBER_ROLE Name oder ID der Rolle, die jedes Gildenmitglied hat (Standard: VANEN)
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 
 const token = process.env.DISCORD_BOT_TOKEN;
 const guildId = process.env.DISCORD_GUILD_ID;
 const optInRole = process.env.DISCORD_OPTIN_ROLE || 'Website';
+const memberRole = process.env.DISCORD_MEMBER_ROLE || 'VANEN';
 const api = process.env.DISCORD_API_BASE || 'https://discord.com/api/v10';
 const cdn = process.env.DISCORD_CDN_BASE || 'https://cdn.discordapp.com';
 
@@ -60,11 +62,17 @@ function avatarUrl(member) {
 try {
   const roles = await request(`${api}/guilds/${guildId}/roles`);
   const roleNames = new Map(roles.map((r) => [r.id, r.name]));
-  const optIn = roles.find((r) => r.id === optInRole || r.name.toLowerCase() === optInRole.toLowerCase());
-  if (!optIn) throw new Error(`Opt-in-Rolle „${optInRole}“ gibt es auf dem Server nicht.`);
+  const findRole = (wanted, label) => {
+    const role = roles.find((r) => r.id === wanted || r.name.toLowerCase() === wanted.toLowerCase());
+    if (!role) throw new Error(`${label} „${wanted}“ gibt es auf dem Server nicht.`);
+    return role;
+  };
+  const optIn = findRole(optInRole, 'Opt-in-Rolle');
+  // Nur Gildenmitglieder: wer die Opt-in-Rolle hat, aber nicht die Mitgliedsrolle, wird nicht übernommen
+  const member = findRole(memberRole, 'Mitgliedsrolle');
 
   const all = await fetchMembers();
-  const selected = all.filter((m) => !m.user.bot && m.roles.includes(optIn.id));
+  const selected = all.filter((m) => !m.user.bot && m.roles.includes(optIn.id) && m.roles.includes(member.id));
 
   await rm(avatarDir, { recursive: true, force: true });
   await mkdir(avatarDir, { recursive: true });
@@ -91,7 +99,7 @@ try {
   }
 
   await writeFile(dataFile, JSON.stringify({ syncedAt: new Date().toISOString(), members }, null, 2) + '\n');
-  console.log(`Discord-Sync: ${members.length} von ${all.length} Mitgliedern mit Rolle „${optIn.name}“ übernommen.`);
+  console.log(`Discord-Sync: ${members.length} von ${all.length} Mitgliedern mit Rollen „${member.name}“ und „${optIn.name}“ übernommen.`);
 } catch (err) {
   console.error(`Discord-Sync fehlgeschlagen: ${err.message}`);
   process.exit(1);
