@@ -18,9 +18,12 @@ discord:
     Offiziere: [Offizier, Offiziere, "WoW Forever: Officer"]
   # Spiel auf der Seite → Discord-Rollennamen (alle passenden Spiele werden angezeigt)
   games:
-    DAoC: [DAoC, Dark Age of Camelot]
+    DAoC: [DAoC]
     New World: [New World]
     WoW: [WoW]
+    Rift: [RIFT]
+    Diablo: [Diablo]
+    WAR: [WAR]
 
 # Ergänzungen für Mitglieder aus dem Discord-Sync: Name, Gruppe und Avatar kommen weiter aus Discord,
 # since, games und bio von hier ("dabei seit" erscheint nur, wenn since hier angegeben ist;

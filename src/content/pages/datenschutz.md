@@ -16,8 +16,7 @@ Die nachfolgende Übersicht fasst die Arten der verarbeiteten Daten und die Zwec
 
 ### Arten der verarbeiteten Daten
 
-- Kontaktdaten (z. B. E-Mail, Telefonnummern).
-- Inhaltsdaten (z. B. Inhalte von E-Mails).
+- Kontaktdaten (z. B. Discord).
 - Meta-/Kommunikationsdaten (z. B. Geräte-Informationen, IP-Adressen).
 - Nutzungsdaten (z. B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten).
 
