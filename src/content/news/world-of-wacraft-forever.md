@@ -1,5 +1,5 @@
 ---
-title: "Wir suchen Mitspieler:innen für World of Warcraft: Forever"
+title: "Wir suchen Mitspieler:innen für World of Warcraft: Forever (Allianz / PvE)"
 date: '2026-10-22T20:00:00+02:00'
 author: B3N
 teaser: Bist du auf der Suche nach einer neuen Heimat in Azeroth? Suchst du eine Gemeinschaft, die den Spagat zwischen echtem Leben (Familie, Job) und ambitioniertem, entspanntem Gaming meistert? Dann bist du bei VANEN genau richtig!
@@ -11,7 +11,7 @@ Wir sind keine x-beliebige Massengilde, sondern eine **traditionsreiche, zusamme
 Viele von uns stehen mitten im Leben, haben Familie und berufliche Verpflichtungen - wollen aber trotzdem nicht auf das gemeinsame Gaming-Erlebnis verzichten. Bei **VANEN** steht der **Spaß am Spiel** an erster Stelle, kombiniert mit einem **gesunden Anspruch**: Wir wollen gemeinsam Inhalte meistern und Ziele erreichen, ohne dass der Leistungsdruck den Spielspaß verdrängt.
 
 ### 🎯 Was planen wir für WoW Forever?
-Für unser Abenteuer auf den *World of Warcraft Forever*-Servern peilen wir langfristig und nachhaltig Folgendes an:
+Für unser Abenteuer auf den *World of Warcraft Forever*-Servern (**Normal / PvE** auf Seite der **Allianz**) peilen wir langfristig und nachhaltig Folgendes an:
 * **Eigene Raids:** Aufbau eines festen, eingespielten Raidkaders, um entspannt und zielorientiert den Endcontent zu erleben.
 * **Regelmäßige Dungeon-Runs:** Ob zum Ausrüsten, Twinks leveln oder einfach zum gemeinsamen Quatschen - wir ziehen regelmäßig zusammen los.
 * **Battleground Groups:** Abseits von Raids und Dungeons, machen viele von uns regelmäßig PvP.
