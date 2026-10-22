@@ -17,7 +17,8 @@ const dataFile = new URL('../src/data/discord-members.json', import.meta.url);
 const avatarDir = new URL('../src/assets/img/discord/', import.meta.url);
 
 if (!token || !guildId) {
-  console.log('Discord-Sync übersprungen: DISCORD_BOT_TOKEN oder DISCORD_GUILD_ID nicht gesetzt.');
+  const missing = [!token && 'DISCORD_BOT_TOKEN', !guildId && 'DISCORD_GUILD_ID'].filter(Boolean);
+  console.log(`Discord-Sync übersprungen: ${missing.join(' und ')} nicht gesetzt.`);
   process.exit(0);
 }
 

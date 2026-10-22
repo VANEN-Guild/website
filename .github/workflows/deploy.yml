@@ -33,8 +33,9 @@ jobs:
         run: node scripts/sync-discord.mjs
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
-          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
-          DISCORD_OPTIN_ROLE: ${{ vars.DISCORD_OPTIN_ROLE }}
+          # Guild-ID und Rolle dürfen als Variable oder als Secret angelegt sein
+          DISCORD_GUILD_ID: ${{ vars.DISCORD_GUILD_ID || secrets.DISCORD_GUILD_ID }}
+          DISCORD_OPTIN_ROLE: ${{ vars.DISCORD_OPTIN_ROLE || secrets.DISCORD_OPTIN_ROLE }}
       - uses: withastro/action@v6
         with:
           node-version: 24
