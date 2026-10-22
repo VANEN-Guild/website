@@ -46,6 +46,8 @@ extras:
     since: 2003
   - discord: blenacup
     since: 2006
+  - discord: senator1
+    since: 2003
 
 members: []
   # name:      Anzeigename (Pflicht)
