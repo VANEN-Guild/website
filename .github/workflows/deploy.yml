@@ -3,9 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # täglich neu bauen, damit die Mitgliederliste mit Discord synchron bleibt
+  # stündlich neu bauen, damit die Mitgliederliste mit Discord synchron bleibt
+  # (krumme Minute, weil GitHub Läufe zur vollen Stunde oft stark verzögert)
   schedule:
-    - cron: '0 4 * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:

@@ -73,9 +73,9 @@ Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitu
 Auf der Seite „Mitglieder“ veröffentlichen wir Angaben zu Mitgliedern unserer Spielergemeinschaft. Die Veröffentlichung erfolgt nur mit Einwilligung der jeweiligen Person:
 
 - **Manuelle Einträge:** Anzeigename, Rolle und – soweit angegeben – Discord-Benutzername und Profil-Link, Jahr des Beitritts, gespielte Spiele und eine selbst verfasste Kurzbeschreibung.
-- **Einträge aus unserem Discord-Server:** Mitglieder, die sich auf unserem Discord-Server selbst die Rolle „Website“ geben, werden automatisch übernommen. Dabei werden Anzeigename, Discord-Benutzername und Profil-Link, die Serverrollen (zur Gruppierung und für die Anzeige gespielter Spiele) und das Profilbild bei der Erstellung der Website bzw. täglich über die Schnittstelle von Discord abgerufen. Das Profilbild wird von uns gespeichert und von unserem Webhoster ausgeliefert; beim Aufruf der Seite werden keine Daten an Discord übertragen.
+- **Einträge aus unserem Discord-Server:** Mitglieder, die sich auf unserem Discord-Server selbst die Rolle „Website“ geben, werden automatisch übernommen. Dabei werden Anzeigename, Discord-Benutzername und Profil-Link, die Serverrollen (zur Gruppierung und für die Anzeige gespielter Spiele) und das Profilbild bei der Erstellung der Website bzw. stündlich über die Schnittstelle von Discord abgerufen. Das Profilbild wird von uns gespeichert und von unserem Webhoster ausgeliefert; beim Aufruf der Seite werden keine Daten an Discord übertragen.
 
-Die Einwilligung kann jederzeit widerrufen werden – durch Entfernen der Rolle „Website“ auf dem Discord-Server oder per Discord bzw. E-Mail an uns. Der Eintrag wird dann bei der nächsten Aktualisierung (spätestens nach einem Tag) entfernt.
+Die Einwilligung kann jederzeit widerrufen werden – durch Entfernen der Rolle „Website“ auf dem Discord-Server oder per Discord bzw. E-Mail an uns. Der Eintrag wird dann bei der nächsten Aktualisierung (in der Regel innerhalb einer Stunde, spätestens nach einem Tag) entfernt.
 
 - **Verarbeitete Datenarten:** Bestandsdaten (z. B. Namen), Inhaltsdaten (z. B. Kurzbeschreibung, Profilbild).
 - **Betroffene Personen:** Mitglieder.
