@@ -35,13 +35,17 @@ extras:
 #    games: [Rift]
 #    bio: Healer aus Leidenschaft.
   - discord: b3n
-    since: 1998
+    since: 1999
   - discord: neil0r
     since: 1998
   - discord: blutherra
     since: 2003
   - discord: dread_man
     since: 2002
+  - discord: bahlos
+    since: 2003
+  - discord: blenacup
+    since: 2006
 
 members: []
   # name:      Anzeigename (Pflicht)
